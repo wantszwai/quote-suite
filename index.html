@@ -361,13 +361,14 @@ function styleForEmail(clone){
   clone.querySelectorAll(&quot;tr.total td&quot;).forEach(el=>{el.style.background=&quot;#D6F5F0&quot;;el.style.fontWeight=&quot;700&quot;;});
   clone.querySelectorAll(&quot;tr.section td&quot;).forEach(el=>{el.style.background=&quot;#e8f2f0&quot;;el.style.fontWeight=&quot;700&quot;;el.style.color=&quot;#374151&quot;;});
 }
-async function copyTbl(sel,label,noHeader){
+async function copyTbl(sel,label,noHeader,noStyle){
   const t=document.querySelector(sel);if(!t){toast(&quot;Add items first&quot;);return;}
   const clone=t.cloneNode(true);
   clone.querySelectorAll(&quot;input&quot;).forEach(i=>{const td=i.closest(&quot;td&quot;);if(td)td.textContent=i.value;});
   clone.querySelectorAll(&quot;.noprint&quot;).forEach(el=>el.remove());
   const _hc=(clone.querySelector(&quot;thead tr&quot;)||{children:[]}).children.length;clone.querySelectorAll(&quot;tbody tr&quot;).forEach(tr=>{const _f=tr.firstElementChild;if(_f&amp;&amp;_f.hasAttribute(&quot;colspan&quot;))_f.setAttribute(&quot;colspan&quot;,_hc-(tr.children.length-1));});
-  styleForEmail(clone);
+  if(noStyle){clone.removeAttribute(&quot;style&quot;);clone.querySelectorAll(&quot;[style]&quot;).forEach(el=>el.removeAttribute(&quot;style&quot;));clone.querySelectorAll(&quot;[class]&quot;).forEach(el=>el.removeAttribute(&quot;class&quot;));}
+  else styleForEmail(clone);
   if(noHeader){const _th=clone.querySelector(&quot;thead&quot;);if(_th)_th.remove();}
   const html=clone.outerHTML, plain=clone.innerText;
   const holder=document.createElement(&quot;div&quot;);holder.style.cssText=&quot;position:fixed;left:-9999px;top:0&quot;;holder.appendChild(clone);document.body.appendChild(holder);
@@ -376,11 +377,8 @@ async function copyTbl(sel,label,noHeader){
   finally{document.body.removeChild(holder);}
 }
 function copyPrice(){copyTbl(&quot;#priceTbl&quot;,&quot;Price Table&quot;);}
-function copyCase(){copyTbl(&quot;#caseTbl&quot;,&quot;Case Table&quot;,true);}
+function copyCase(){copyTbl(&quot;#caseTbl&quot;,&quot;Case Table&quot;,true,true);}
 render();
-</script>
-<script>
-if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}
 </script>
 </body>
 </html>"></iframe>
@@ -680,5 +678,6 @@ document.querySelectorAll(".tab").forEach(function(b){
   });
 });
 </script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
 </body>
 </html>
