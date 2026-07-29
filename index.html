@@ -615,10 +615,12 @@ tr.section td{background:#e8f2f0;font-weight:700;color:#374151;font-size:11px;te
       <h2>Service plans</h2>
       <div style=&quot;display:flex;gap:10px;align-items:center;flex-wrap:wrap&quot;>
         <select id=&quot;fam&quot; onchange=&quot;render()&quot;><option value=&quot;&quot;>All families</option></select>
+        <label style=&quot;font-size:12px;color:#374151;display:flex;align-items:center;gap:6px&quot;>Custom % off MSRP <input id=&quot;custPct&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;0.5&quot; placeholder=&quot;e.g. 40&quot; oninput=&quot;render()&quot; style=&quot;width:92px;font-family:inherit;font-size:13px;padding:6px 8px;border:1px solid #d1d5db;border-radius:7px&quot;></label>
         <label style=&quot;font-size:12px;color:#374151;cursor:pointer&quot;><input type=&quot;checkbox&quot; id=&quot;showEnt&quot; checked onchange=&quot;render()&quot; style=&quot;vertical-align:middle&quot;> Show entitled models</label>
         <button class=&quot;btn ghost&quot; onclick=&quot;copyTable()&quot;>Copy for email</button>
       </div>
     </div>
+    <p id=&quot;basis&quot; style=&quot;font-size:12px;color:#6b7280;margin:0 0 10px&quot;></p>
     <div id=&quot;wrap&quot;></div>
   </div>
 </div>
@@ -629,8 +631,10 @@ const $=s=>document.querySelector(s);
 const fmt=n=>n==null?&quot;—&quot;:Number(n).toLocaleString(&quot;en-US&quot;,{maximumFractionDigits:2});
 const fams=[...new Set(DATA.map(d=>d.family))];
 $(&quot;#fam&quot;).insertAdjacentHTML(&quot;beforeend&quot;,fams.map(f=>`<option value=&quot;${f}&quot;>${f}</option>`).join(&quot;&quot;));
+function customPct(){const v=parseFloat($(&quot;#custPct&quot;)&amp;&amp;$(&quot;#custPct&quot;).value);return (isFinite(v)&amp;&amp;v>0)?v:null;}
+function priceOf(d){const c=customPct();return c!=null?Math.round((d.msrp||0)*(1-c/100)):d.res;}
 function render(){
-  const f=$(&quot;#fam&quot;).value, ent=$(&quot;#showEnt&quot;).checked;
+  const f=$(&quot;#fam&quot;).value, ent=$(&quot;#showEnt&quot;).checked, c=customPct();
   const groups=fams.filter(x=>!f||x===f);
   const ncol=4+(ent?1:0);
   let body=&quot;&quot;;
@@ -639,10 +643,13 @@ function render(){
     if(!rows.length)return;
     body+=`<tr class=&quot;section&quot;><td colspan=&quot;${ncol}&quot;>${g}</td></tr>`;
     rows.forEach(d=>{
-      body+=`<tr><td>${d.part}</td><td>${d.plan}${ent?'':''}</td>${ent?`<td class=&quot;ent&quot;>${d.ent||&quot;—&quot;}</td>`:''}<td class=&quot;num&quot;>${fmt(d.msrp)}</td><td class=&quot;num&quot;>${fmt(d.res)}</td></tr>`;
+      body+=`<tr><td>${d.part}</td><td>${d.plan}${ent?'':''}</td>${ent?`<td class=&quot;ent&quot;>${d.ent||&quot;—&quot;}</td>`:''}<td class=&quot;num&quot;>${fmt(d.msrp)}</td><td class=&quot;num&quot;>${fmt(priceOf(d))}</td></tr>`;
     });
   });
-  $(&quot;#wrap&quot;).innerHTML=`<table id=&quot;svcTbl&quot;><thead><tr><th>Part No.</th><th>Plan</th>${ent?'<th>Entitled Models</th>':''}<th class=&quot;num&quot;>MSRP HK$</th><th class=&quot;num&quot;>Reseller Price HK$/room</th></tr></thead><tbody>${body}</tbody></table>`;
+  const hdr=c!=null?`Reseller Price HK$ (MSRP −${c}%)`:&quot;Reseller Price HK$/room&quot;;
+  $(&quot;#wrap&quot;).innerHTML=`<table id=&quot;svcTbl&quot;><thead><tr><th>Part No.</th><th>Plan</th>${ent?'<th>Entitled Models</th>':''}<th class=&quot;num&quot;>MSRP HK$</th><th class=&quot;num&quot;>${hdr}</th></tr></thead><tbody>${body}</tbody></table>`;
+  const b=$(&quot;#basis&quot;); if(b) b.textContent = c!=null?(&quot;Reseller price = MSRP − &quot;+c+&quot;% (custom discount)&quot;):(&quot;Reseller price = standard per-room price&quot;);
+  const cp=$(&quot;#custPct&quot;); if(cp) cp.style.borderColor = c!=null?&quot;#0D3A38&quot;:&quot;&quot;;
 }
 function styleForEmail(clone){
   clone.style.borderCollapse=&quot;collapse&quot;;clone.style.fontFamily=&quot;Arial,Helvetica,sans-serif&quot;;clone.style.fontSize=&quot;13px&quot;;
