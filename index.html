@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Logitech Quote Suite</title>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#00FDCF">
@@ -10,9 +10,10 @@
 <style>
 :root{color-scheme:light}
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
 html,body{margin:0;height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#F3F1EC;display:flex;flex-direction:column}
-.suitehead{display:flex;align-items:center;gap:16px;background:#00FDCF;border-bottom:1px solid rgba(0,0,0,.08);padding:11px 18px;flex:0 0 auto;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:#F3F1EC;display:flex;flex-direction:column;overflow:hidden}
+.suitehead{display:flex;align-items:center;gap:16px;background:#00FDCF;border-bottom:1px solid rgba(0,0,0,.08);padding:max(11px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 11px max(18px,env(safe-area-inset-left));flex:0 0 auto;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .brand{font-weight:800;font-size:16px;color:#0D3A38;letter-spacing:.01em}
 .tabs{display:flex;gap:8px;margin-left:4px}
 .tab{border:1px solid rgba(0,0,0,.12);padding:7px 22px;border-radius:8px;font-weight:700;cursor:pointer;font-size:13px;font-family:inherit;opacity:.68;transition:opacity .12s,box-shadow .12s}
@@ -23,7 +24,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Ar
 .tab[data-t="ss"]{background:#0D3A38;color:#ffffff}
 .frameWrap{flex:1 1 auto;position:relative;min-height:0}
 iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#F3F1EC}
+iframe{left:env(safe-area-inset-left,0px);bottom:env(safe-area-inset-bottom,0px);width:calc(100% - env(safe-area-inset-left,0px) - env(safe-area-inset-right,0px));height:calc(100% - env(safe-area-inset-bottom,0px))}
 iframe.on{display:block}
+@media(max-width:720px){
+  html,body{height:100dvh}
+  .suitehead{flex-wrap:wrap;gap:8px 10px;padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right));padding-bottom:10px}
+  .brand{flex:1 1 100%;font-size:15px;line-height:1.2;white-space:nowrap}
+  .tabs{flex:1 1 100%;margin-left:0;gap:6px;width:100%}
+  .tab{flex:1 1 0;min-width:0;padding:8px 4px;font-size:13px;line-height:1.15;white-space:nowrap;text-align:center;min-height:44px}
+}
 </style>
 </head>
 <body>
@@ -40,7 +49,7 @@ iframe.on{display:block}
 <html lang=&quot;en&quot;>
 <head>
 <meta charset=&quot;UTF-8&quot;>
-<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;>
 <title>Logitech Quote Builder</title>
 <style>
 :root{color-scheme:light}
@@ -96,6 +105,58 @@ tr.rev td{background:#fff7e6}
 .caseform{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 @media(max-width:640px){.caseform{grid-template-columns:1fr}}
 .foot{color:#9ca3af;font-size:11.5px;text-align:center;margin:6px 0 30px}
+html{-webkit-text-size-adjust:100%}
+@media(max-width:720px){
+  body{overflow-x:hidden}
+  .wrap{padding:14px 12px 28px;max-width:100%}
+  .card{padding:14px 12px}
+  h1{font-size:18px}
+  .sub{font-size:12.5px;line-height:1.4}
+  .row{flex-direction:column;align-items:stretch;gap:12px}
+  .fld,.searchwrap{width:100%;min-width:0;flex:1 1 auto}
+  .fld input,.fld select,input,select,textarea,.discbox,#custPct,#search{max-width:100%}
+  .fld input,.fld select,.discbox,#custPct,#search,textarea{width:100%!important;min-height:44px;font-size:16px}
+  input,select,textarea{font-size:16px}
+  .seg{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:100%}
+  .seg button{min-height:44px;padding:10px 8px;white-space:nowrap;font-size:13px}
+  .btn{min-height:44px;padding:10px 14px}
+  .caseform{grid-template-columns:1fr}
+  .tblhead{flex-direction:column;align-items:stretch;gap:10px}
+  .tblhead>div{display:flex!important;flex-wrap:wrap;align-items:center;gap:8px;width:100%}
+  .tblhead select{flex:1 1 100%;min-height:44px;width:100%}
+  .tblhead label{display:inline-flex;align-items:center;gap:8px;min-height:40px;margin:0}
+  .tblhead .btn{flex:1 1 calc(50% - 8px);text-align:center}
+  .tblhead input[type=number]{width:7.5rem!important;min-height:44px;font-size:16px}
+  .pill{max-width:100%;white-space:normal}
+  input[type=checkbox]{width:22px;height:22px;accent-color:#0D3A38}
+  .qty,.pctbox,.disc{width:5.5rem!important;min-height:44px;font-size:16px}
+  .del{min-width:44px;min-height:44px;font-size:22px}
+  .accbtn{min-height:36px;padding:6px 10px}
+  .opt{align-items:flex-start}
+  .opt>span:first-child{min-width:0;flex:1 1 auto}
+  #priceWrap,#caseWrap,#quoteWrap,#wrap{max-width:100%}
+  #priceWrap table,#caseWrap table,#quoteWrap table,#wrap table{display:block;width:100%;max-width:100%}
+  #priceWrap thead,#caseWrap thead,#quoteWrap thead,#wrap thead{display:none}
+  #priceWrap tbody,#caseWrap tbody,#quoteWrap tbody,#wrap tbody,#priceWrap tr,#caseWrap tr,#quoteWrap tr,#wrap tr{display:block;width:100%;max-width:100%}
+  #priceWrap tr,#caseWrap tr,#quoteWrap tr,#wrap tr{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;padding:2px 10px 4px;background:#fff}
+  #priceWrap tr.section,#caseWrap tr.section,#quoteWrap tr.section,#wrap tr.section{background:#e8f2f0;border:none;border-radius:8px;margin:12px 0 8px;padding:8px 10px}
+  #priceWrap tr.total,#quoteWrap tr.total{background:#D6F5F0;border:none}
+  #priceWrap td,#caseWrap td,#quoteWrap td,#wrap td{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border:none;padding:8px 0;text-align:right;min-width:0}
+  #priceWrap td[data-label]::before,#caseWrap td[data-label]::before,#quoteWrap td[data-label]::before,#wrap td[data-label]::before{content:attr(data-label);flex:1 1 46%;min-width:0;text-align:left;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#6b7280;line-height:1.3}
+  #priceWrap td.num,#caseWrap td.num,#quoteWrap td.num,#wrap td.num,#priceWrap td.part,#caseWrap td.part,#quoteWrap td.part,#wrap td.part{white-space:nowrap}
+  #priceWrap td.stack,#caseWrap td.stack,#quoteWrap td.stack,#wrap td.stack,#priceWrap td.ent,#caseWrap td.ent,#quoteWrap td.ent,#wrap td.ent{flex-direction:column;align-items:stretch;text-align:left;gap:3px;white-space:normal;overflow-wrap:break-word}
+  #priceWrap td.stack::before,#caseWrap td.stack::before,#quoteWrap td.stack::before,#wrap td.stack::before,#priceWrap td.ent::before,#caseWrap td.ent::before,#quoteWrap td.ent::before,#wrap td.ent::before{flex:none}
+  #priceWrap tr.section td,#caseWrap tr.section td,#quoteWrap tr.section td,#wrap tr.section td{display:block;padding:0;text-align:left}
+  #priceWrap tr.total td,#quoteWrap tr.total td{display:block;text-align:center!important;padding:8px 0}
+  #priceWrap tr.total td.noprint,#quoteWrap tr.total td.noprint{display:none}
+  #priceWrap tr:not(.section):not(.total)>td:not([data-label]),#quoteWrap tr:not(.section):not(.total)>td:not([data-label]){justify-content:flex-end}
+  .tblhead label:has(input[type=number]){flex:1 1 100%;justify-content:space-between;white-space:nowrap}
+}
+@media(max-width:899px) and (min-width:721px){
+  .searchwrap{min-width:0}
+  .row>.fld{flex:1 1 auto;min-width:max-content}
+  #custPct,.discbox{width:100%!important}
+}
 </style>
 </head>
 <body>
@@ -349,10 +410,10 @@ function render(){
     const ncol=6+3;
     const mkRow=(l)=>{
       const p=CATALOG.find(c=>c.part===l.part);const pr=price(p,l);const lt=(pr||0)*l.qty;
-      return {lt, html:`<tr class=&quot;${l.review?'rev':''}&quot;><td>${p.part}</td><td>${p.desc}${l.review?'<span class=&quot;revbadge noprint&quot;>review</span>':''}</td><td class=&quot;num&quot;>${fmt(p.msrp)}</td><td class=&quot;num&quot;>${p.warr??&quot;—&quot;}</td><td class=&quot;num&quot;>${fmt(pr)}</td>
-      <td class=&quot;num&quot;><input class=&quot;qty&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;${l.qty}&quot; onchange=&quot;setQty('${p.part}',this.value)&quot;></td>
-      <td class=&quot;num noprint&quot;><input class=&quot;qty pctbox&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;0.5&quot; value=&quot;${l.pct??''}&quot; placeholder=&quot;—&quot; title=&quot;Custom % off MSRP for this line (internal — not shown to reseller)&quot; onchange=&quot;setPct('${p.part}',this.value)&quot; style=&quot;width:72px&quot;></td>
-      <td class=&quot;noprint ctr&quot;><input type=&quot;checkbox&quot; ${l.opt?&quot;checked&quot;:&quot;&quot;} title=&quot;Mark optional&quot; onchange=&quot;setOpt('${p.part}',this.checked)&quot;></td><td class=&quot;noprint&quot;>${(!l.acc&amp;&amp;!l.opt&amp;&amp;ACCMAP[p.part])?('<button class=&quot;accbtn&quot; title=&quot;Add related accessories&quot; onclick=&quot;addAccessories(\''+p.part+'\')&quot;>+ Acc</button>'):''}<button class=&quot;del&quot; onclick=&quot;del('${p.part}')&quot;>×</button></td></tr>`};
+      return {lt, html:`<tr class=&quot;${l.review?'rev':''}&quot;><td class=&quot;part&quot; data-label=&quot;Part No.&quot;>${p.part}</td><td class=&quot;stack&quot; data-label=&quot;Description&quot;>${p.desc}${l.review?'<span class=&quot;revbadge noprint&quot;>review</span>':''}</td><td class=&quot;num&quot; data-label=&quot;MSRP HK$&quot;>${fmt(p.msrp)}</td><td class=&quot;num&quot; data-label=&quot;Warranty (yr)&quot;>${p.warr??&quot;—&quot;}</td><td class=&quot;num&quot; data-label=&quot;Reseller Price HK$/Unit&quot;>${fmt(pr)}</td>
+      <td class=&quot;num&quot; data-label=&quot;Qty&quot;><input class=&quot;qty&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;${l.qty}&quot; onchange=&quot;setQty('${p.part}',this.value)&quot;></td>
+      <td class=&quot;num noprint&quot; data-label=&quot;Custom % off MSRP&quot;><input class=&quot;qty pctbox&quot; type=&quot;number&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;0.5&quot; value=&quot;${l.pct??''}&quot; placeholder=&quot;—&quot; title=&quot;Custom % off MSRP for this line (internal — not shown to reseller)&quot; onchange=&quot;setPct('${p.part}',this.value)&quot; style=&quot;width:72px&quot;></td>
+      <td class=&quot;noprint ctr&quot; data-label=&quot;Optional&quot;><input type=&quot;checkbox&quot; ${l.opt?&quot;checked&quot;:&quot;&quot;} title=&quot;Mark optional&quot; onchange=&quot;setOpt('${p.part}',this.checked)&quot;></td><td class=&quot;noprint&quot;>${(!l.acc&amp;&amp;!l.opt&amp;&amp;ACCMAP[p.part])?('<button class=&quot;accbtn&quot; title=&quot;Add related accessories&quot; onclick=&quot;addAccessories(\''+p.part+'\')&quot;>+ Acc</button>'):''}<button class=&quot;del&quot; onclick=&quot;del('${p.part}')&quot;>×</button></td></tr>`};
     };
     const mains=lines.filter(l=>!l.opt&amp;&amp;!l.acc), accs=lines.filter(l=>!l.opt&amp;&amp;l.acc), opts=lines.filter(l=>l.opt);
     let mainAmt=0,accAmt=0,optAmt=0,rows=&quot;&quot;;
@@ -376,7 +437,7 @@ function render(){
   let dp=0,bill=0;lines.forEach(l=>{const p=CATALOG.find(c=>c.part===l.part);dp+=(p.dp||0)*l.qty;bill+=(price(p,l)||0)*l.qty;});
   const R=$(&quot;#cReseller&quot;).value||&quot;—&quot;,D=$(&quot;#cDist&quot;).value,E=$(&quot;#cEnd&quot;).value||&quot;—&quot;;
   $(&quot;#caseWrap&quot;).innerHTML=`<table id=&quot;caseTbl&quot;><thead><tr><th>Reseller</th><th>Distributor</th><th>End User / Project</th><th>Model List</th><th class=&quot;num&quot;>DP USD</th><th class=&quot;num&quot;>Amount HKD Billing</th></tr></thead>
-  <tbody><tr><td>${R}</td><td>${D}</td><td>${E}</td><td style=&quot;white-space:pre-line&quot;>${modelList||&quot;—&quot;}</td><td class=&quot;num&quot;>${fmt(dp)}</td><td class=&quot;num&quot;>${fmt(bill)}</td></tr></tbody></table>`;
+  <tbody><tr><td data-label=&quot;Reseller&quot;>${R}</td><td data-label=&quot;Distributor&quot;>${D}</td><td data-label=&quot;End User / Project&quot;>${E}</td><td class=&quot;stack&quot; data-label=&quot;Model List&quot; style=&quot;white-space:pre-line&quot;>${modelList||&quot;—&quot;}</td><td class=&quot;num&quot; data-label=&quot;DP USD&quot;>${fmt(dp)}</td><td class=&quot;num&quot; data-label=&quot;Amount HKD Billing&quot;>${fmt(bill)}</td></tr></tbody></table>`;
 }
 [&quot;cReseller&quot;,&quot;cDist&quot;,&quot;cEnd&quot;].forEach(id=>$(&quot;#&quot;+id).addEventListener(&quot;input&quot;,render));
 
@@ -413,7 +474,7 @@ render();
 <html lang=&quot;en&quot;>
 <head>
 <meta charset=&quot;UTF-8&quot;>
-<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+<meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;>
 <title>Logitech PWS Quote Builder</title>
 <style>
 :root{color-scheme:light}
@@ -462,6 +523,58 @@ tr.total td{font-weight:700;background:#D6F5F0;border-top:2px solid #a9e3da}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hint{font-size:12px;color:#9ca3af;margin-top:8px}
 .foot{color:#9ca3af;font-size:11.5px;text-align:center;margin:6px 0 30px}
+html{-webkit-text-size-adjust:100%}
+@media(max-width:720px){
+  body{overflow-x:hidden}
+  .wrap{padding:14px 12px 28px;max-width:100%}
+  .card{padding:14px 12px}
+  h1{font-size:18px}
+  .sub{font-size:12.5px;line-height:1.4}
+  .row{flex-direction:column;align-items:stretch;gap:12px}
+  .fld,.searchwrap{width:100%;min-width:0;flex:1 1 auto}
+  .fld input,.fld select,input,select,textarea,.discbox,#custPct,#search{max-width:100%}
+  .fld input,.fld select,.discbox,#custPct,#search,textarea{width:100%!important;min-height:44px;font-size:16px}
+  input,select,textarea{font-size:16px}
+  .seg{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:100%}
+  .seg button{min-height:44px;padding:10px 8px;white-space:nowrap;font-size:13px}
+  .btn{min-height:44px;padding:10px 14px}
+  .caseform{grid-template-columns:1fr}
+  .tblhead{flex-direction:column;align-items:stretch;gap:10px}
+  .tblhead>div{display:flex!important;flex-wrap:wrap;align-items:center;gap:8px;width:100%}
+  .tblhead select{flex:1 1 100%;min-height:44px;width:100%}
+  .tblhead label{display:inline-flex;align-items:center;gap:8px;min-height:40px;margin:0}
+  .tblhead .btn{flex:1 1 calc(50% - 8px);text-align:center}
+  .tblhead input[type=number]{width:7.5rem!important;min-height:44px;font-size:16px}
+  .pill{max-width:100%;white-space:normal}
+  input[type=checkbox]{width:22px;height:22px;accent-color:#0D3A38}
+  .qty,.pctbox,.disc{width:5.5rem!important;min-height:44px;font-size:16px}
+  .del{min-width:44px;min-height:44px;font-size:22px}
+  .accbtn{min-height:36px;padding:6px 10px}
+  .opt{align-items:flex-start}
+  .opt>span:first-child{min-width:0;flex:1 1 auto}
+  #priceWrap,#caseWrap,#quoteWrap,#wrap{max-width:100%}
+  #priceWrap table,#caseWrap table,#quoteWrap table,#wrap table{display:block;width:100%;max-width:100%}
+  #priceWrap thead,#caseWrap thead,#quoteWrap thead,#wrap thead{display:none}
+  #priceWrap tbody,#caseWrap tbody,#quoteWrap tbody,#wrap tbody,#priceWrap tr,#caseWrap tr,#quoteWrap tr,#wrap tr{display:block;width:100%;max-width:100%}
+  #priceWrap tr,#caseWrap tr,#quoteWrap tr,#wrap tr{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;padding:2px 10px 4px;background:#fff}
+  #priceWrap tr.section,#caseWrap tr.section,#quoteWrap tr.section,#wrap tr.section{background:#e8f2f0;border:none;border-radius:8px;margin:12px 0 8px;padding:8px 10px}
+  #priceWrap tr.total,#quoteWrap tr.total{background:#D6F5F0;border:none}
+  #priceWrap td,#caseWrap td,#quoteWrap td,#wrap td{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border:none;padding:8px 0;text-align:right;min-width:0}
+  #priceWrap td[data-label]::before,#caseWrap td[data-label]::before,#quoteWrap td[data-label]::before,#wrap td[data-label]::before{content:attr(data-label);flex:1 1 46%;min-width:0;text-align:left;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#6b7280;line-height:1.3}
+  #priceWrap td.num,#caseWrap td.num,#quoteWrap td.num,#wrap td.num,#priceWrap td.part,#caseWrap td.part,#quoteWrap td.part,#wrap td.part{white-space:nowrap}
+  #priceWrap td.stack,#caseWrap td.stack,#quoteWrap td.stack,#wrap td.stack,#priceWrap td.ent,#caseWrap td.ent,#quoteWrap td.ent,#wrap td.ent{flex-direction:column;align-items:stretch;text-align:left;gap:3px;white-space:normal;overflow-wrap:break-word}
+  #priceWrap td.stack::before,#caseWrap td.stack::before,#quoteWrap td.stack::before,#wrap td.stack::before,#priceWrap td.ent::before,#caseWrap td.ent::before,#quoteWrap td.ent::before,#wrap td.ent::before{flex:none}
+  #priceWrap tr.section td,#caseWrap tr.section td,#quoteWrap tr.section td,#wrap tr.section td{display:block;padding:0;text-align:left}
+  #priceWrap tr.total td,#quoteWrap tr.total td{display:block;text-align:center!important;padding:8px 0}
+  #priceWrap tr.total td.noprint,#quoteWrap tr.total td.noprint{display:none}
+  #priceWrap tr:not(.section):not(.total)>td:not([data-label]),#quoteWrap tr:not(.section):not(.total)>td:not([data-label]){justify-content:flex-end}
+  .tblhead label:has(input[type=number]){flex:1 1 100%;justify-content:space-between;white-space:nowrap}
+}
+@media(max-width:899px) and (min-width:721px){
+  .searchwrap{min-width:0}
+  .row>.fld{flex:1 1 auto;min-width:max-content}
+  #custPct,.discbox{width:100%!important}
+}
 </style>
 </head>
 <body>
@@ -585,12 +698,12 @@ function render(){
   lines.forEach(l=>{
     const p=bySku[l.sku];const rp=resPrice(p);const lt=(rp||0)*l.qty;amt+=lt;
     rows+=`<tr>
-      <td>${p.sku}</td>
-      <td>${p.name||p.model}</td>
-      <td class=&quot;ctr&quot;>${p.warr||&quot;—&quot;}</td>
-      <td class=&quot;num&quot;>${fmt(p.msrp)}</td>
-      <td class=&quot;num&quot;>${fmt(rp)}</td>
-      <td class=&quot;ctr&quot;><input class=&quot;qty&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;${l.qty}&quot; onchange=&quot;setQty('${p.sku}',this.value)&quot;></td>
+      <td class=&quot;part&quot; data-label=&quot;SKU Number&quot;>${p.sku}</td>
+      <td class=&quot;stack&quot; data-label=&quot;Model Name&quot;>${p.name||p.model}</td>
+      <td class=&quot;ctr&quot; data-label=&quot;Warranty (yr)&quot;>${p.warr||&quot;—&quot;}</td>
+      <td class=&quot;num&quot; data-label=&quot;MSRP HK$&quot;>${fmt(p.msrp)}</td>
+      <td class=&quot;num&quot; data-label=&quot;Reseller Price HK$/Unit&quot;>${fmt(rp)}</td>
+      <td class=&quot;ctr&quot; data-label=&quot;Qty&quot;><input class=&quot;qty&quot; type=&quot;number&quot; min=&quot;1&quot; value=&quot;${l.qty}&quot; onchange=&quot;setQty('${p.sku}',this.value)&quot;></td>
       <td class=&quot;noprint&quot;><button class=&quot;del&quot; onclick=&quot;del('${p.sku}')&quot;>×</button></td></tr>`;
   });
   const totRow=inclTotal?`<tr class=&quot;total&quot;><td colspan=&quot;6&quot; style=&quot;text-align:right&quot;>Total Amount (HK$): ${fmt(amt)}</td><td class=&quot;noprint&quot;></td></tr>`:&quot;&quot;;
@@ -605,7 +718,7 @@ function renderCase(){
   let dp=0,bill=0;
   lines.forEach(l=>{const p=bySku[l.sku];dp+=(p.dp||0)*l.qty;bill+=(resPrice(p)||0)*l.qty;});
   const R=($(&quot;#cReseller&quot;)&amp;&amp;$(&quot;#cReseller&quot;).value)||&quot;—&quot;,D=($(&quot;#cDist&quot;)&amp;&amp;$(&quot;#cDist&quot;).value)||&quot;—&quot;,E=($(&quot;#cEnd&quot;)&amp;&amp;$(&quot;#cEnd&quot;).value)||&quot;—&quot;;
-  $(&quot;#caseWrap&quot;).innerHTML=`<table id=&quot;pwsCaseTbl&quot;><thead><tr><th>Reseller</th><th>Distributor</th><th>End User / Project</th><th>Model List</th><th class=&quot;num&quot;>DP USD</th><th class=&quot;num&quot;>Amount HKD Billing</th></tr></thead><tbody><tr><td>${R}</td><td>${D}</td><td>${E}</td><td style=&quot;white-space:pre-line&quot;>${modelList||&quot;—&quot;}</td><td class=&quot;num&quot;>${fmt(dp)}</td><td class=&quot;num&quot;>${fmt(bill)}</td></tr></tbody></table>`;
+  $(&quot;#caseWrap&quot;).innerHTML=`<table id=&quot;pwsCaseTbl&quot;><thead><tr><th>Reseller</th><th>Distributor</th><th>End User / Project</th><th>Model List</th><th class=&quot;num&quot;>DP USD</th><th class=&quot;num&quot;>Amount HKD Billing</th></tr></thead><tbody><tr><td data-label=&quot;Reseller&quot;>${R}</td><td data-label=&quot;Distributor&quot;>${D}</td><td data-label=&quot;End User / Project&quot;>${E}</td><td class=&quot;stack&quot; data-label=&quot;Model List&quot; style=&quot;white-space:pre-line&quot;>${modelList||&quot;—&quot;}</td><td class=&quot;num&quot; data-label=&quot;DP USD&quot;>${fmt(dp)}</td><td class=&quot;num&quot; data-label=&quot;Amount HKD Billing&quot;>${fmt(bill)}</td></tr></tbody></table>`;
 }
 $(&quot;#cDomain&quot;).addEventListener(&quot;input&quot;,function(e){
   const m=(e.target.value||&quot;&quot;).match(/@([^\s>]+)/)||[null,e.target.value];
@@ -651,7 +764,7 @@ render();
 </body>
 </html>"></iframe>
     <iframe id="f-ss" allow="clipboard-write" srcdoc="<!DOCTYPE html>
-<html lang=&quot;en&quot;><head><meta charset=&quot;UTF-8&quot;><meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+<html lang=&quot;en&quot;><head><meta charset=&quot;UTF-8&quot;><meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, viewport-fit=cover&quot;>
 <title>Select Service Pricing</title>
 <style>
 :root{color-scheme:light}
@@ -677,6 +790,58 @@ tr.section td{background:#e8f2f0;font-weight:700;color:#374151;font-size:11px;te
 .ent{color:#555;font-size:12px}
 .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);background:#111;color:#fff;padding:11px 20px;border-radius:9px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:99}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+html{-webkit-text-size-adjust:100%}
+@media(max-width:720px){
+  body{overflow-x:hidden}
+  .wrap{padding:14px 12px 28px;max-width:100%}
+  .card{padding:14px 12px}
+  h1{font-size:18px}
+  .sub{font-size:12.5px;line-height:1.4}
+  .row{flex-direction:column;align-items:stretch;gap:12px}
+  .fld,.searchwrap{width:100%;min-width:0;flex:1 1 auto}
+  .fld input,.fld select,input,select,textarea,.discbox,#custPct,#search{max-width:100%}
+  .fld input,.fld select,.discbox,#custPct,#search,textarea{width:100%!important;min-height:44px;font-size:16px}
+  input,select,textarea{font-size:16px}
+  .seg{display:grid;grid-template-columns:1fr 1fr;width:100%;max-width:100%}
+  .seg button{min-height:44px;padding:10px 8px;white-space:nowrap;font-size:13px}
+  .btn{min-height:44px;padding:10px 14px}
+  .caseform{grid-template-columns:1fr}
+  .tblhead{flex-direction:column;align-items:stretch;gap:10px}
+  .tblhead>div{display:flex!important;flex-wrap:wrap;align-items:center;gap:8px;width:100%}
+  .tblhead select{flex:1 1 100%;min-height:44px;width:100%}
+  .tblhead label{display:inline-flex;align-items:center;gap:8px;min-height:40px;margin:0}
+  .tblhead .btn{flex:1 1 calc(50% - 8px);text-align:center}
+  .tblhead input[type=number]{width:7.5rem!important;min-height:44px;font-size:16px}
+  .pill{max-width:100%;white-space:normal}
+  input[type=checkbox]{width:22px;height:22px;accent-color:#0D3A38}
+  .qty,.pctbox,.disc{width:5.5rem!important;min-height:44px;font-size:16px}
+  .del{min-width:44px;min-height:44px;font-size:22px}
+  .accbtn{min-height:36px;padding:6px 10px}
+  .opt{align-items:flex-start}
+  .opt>span:first-child{min-width:0;flex:1 1 auto}
+  #priceWrap,#caseWrap,#quoteWrap,#wrap{max-width:100%}
+  #priceWrap table,#caseWrap table,#quoteWrap table,#wrap table{display:block;width:100%;max-width:100%}
+  #priceWrap thead,#caseWrap thead,#quoteWrap thead,#wrap thead{display:none}
+  #priceWrap tbody,#caseWrap tbody,#quoteWrap tbody,#wrap tbody,#priceWrap tr,#caseWrap tr,#quoteWrap tr,#wrap tr{display:block;width:100%;max-width:100%}
+  #priceWrap tr,#caseWrap tr,#quoteWrap tr,#wrap tr{border:1px solid #e5e7eb;border-radius:10px;margin:0 0 10px;padding:2px 10px 4px;background:#fff}
+  #priceWrap tr.section,#caseWrap tr.section,#quoteWrap tr.section,#wrap tr.section{background:#e8f2f0;border:none;border-radius:8px;margin:12px 0 8px;padding:8px 10px}
+  #priceWrap tr.total,#quoteWrap tr.total{background:#D6F5F0;border:none}
+  #priceWrap td,#caseWrap td,#quoteWrap td,#wrap td{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;border:none;padding:8px 0;text-align:right;min-width:0}
+  #priceWrap td[data-label]::before,#caseWrap td[data-label]::before,#quoteWrap td[data-label]::before,#wrap td[data-label]::before{content:attr(data-label);flex:1 1 46%;min-width:0;text-align:left;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:#6b7280;line-height:1.3}
+  #priceWrap td.num,#caseWrap td.num,#quoteWrap td.num,#wrap td.num,#priceWrap td.part,#caseWrap td.part,#quoteWrap td.part,#wrap td.part{white-space:nowrap}
+  #priceWrap td.stack,#caseWrap td.stack,#quoteWrap td.stack,#wrap td.stack,#priceWrap td.ent,#caseWrap td.ent,#quoteWrap td.ent,#wrap td.ent{flex-direction:column;align-items:stretch;text-align:left;gap:3px;white-space:normal;overflow-wrap:break-word}
+  #priceWrap td.stack::before,#caseWrap td.stack::before,#quoteWrap td.stack::before,#wrap td.stack::before,#priceWrap td.ent::before,#caseWrap td.ent::before,#quoteWrap td.ent::before,#wrap td.ent::before{flex:none}
+  #priceWrap tr.section td,#caseWrap tr.section td,#quoteWrap tr.section td,#wrap tr.section td{display:block;padding:0;text-align:left}
+  #priceWrap tr.total td,#quoteWrap tr.total td{display:block;text-align:center!important;padding:8px 0}
+  #priceWrap tr.total td.noprint,#quoteWrap tr.total td.noprint{display:none}
+  #priceWrap tr:not(.section):not(.total)>td:not([data-label]),#quoteWrap tr:not(.section):not(.total)>td:not([data-label]){justify-content:flex-end}
+  .tblhead label:has(input[type=number]){flex:1 1 100%;justify-content:space-between;white-space:nowrap}
+}
+@media(max-width:899px) and (min-width:721px){
+  .searchwrap{min-width:0}
+  .row>.fld{flex:1 1 auto;min-width:max-content}
+  #custPct,.discbox{width:100%!important}
+}
 </style></head>
 <body>
 <div class=&quot;wrap&quot;>
@@ -715,7 +880,7 @@ function render(){
     if(!rows.length)return;
     body+=`<tr class=&quot;section&quot;><td colspan=&quot;${ncol}&quot;>${g}</td></tr>`;
     rows.forEach(d=>{
-      body+=`<tr><td>${d.part}</td><td>${d.plan}${ent?'':''}</td>${ent?`<td class=&quot;ent&quot;>${d.ent||&quot;—&quot;}</td>`:''}<td class=&quot;num&quot;>${fmt(d.msrp)}</td><td class=&quot;num&quot;>${fmt(priceOf(d))}</td></tr>`;
+      body+=`<tr><td class=&quot;part&quot; data-label=&quot;Part No.&quot;>${d.part}</td><td class=&quot;stack&quot; data-label=&quot;Plan&quot;>${d.plan}</td>${ent?`<td class=&quot;ent&quot; data-label=&quot;Entitled Models&quot;>${d.ent||&quot;—&quot;}</td>`:''}<td class=&quot;num&quot; data-label=&quot;MSRP HK$&quot;>${fmt(d.msrp)}</td><td class=&quot;num&quot; data-label=&quot;Reseller Price HK$/Room&quot;>${fmt(priceOf(d))}</td></tr>`;
     });
   });
   const hdr=&quot;Reseller Price HK$/Room&quot;;
